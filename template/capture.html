@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ESP32-CAM Video Stream</title>
+	<style>
+		.container {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			margin: 20px;
+		}
+		.video {
+			margin: 20px;
+		}
+		#capture {
+			margin: 20px;
+			padding: 10px;
+			font-size: 16px;
+			background-color: #4CAF50;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		#capture:hover {
+			background-color: #3e8e41;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="video">
+			<video id="video-player" autoplay></video>
+		</div>
+		<button id="capture">Capture</button>
+	</div>
+
+	<script>
+		// Get the video player and set the source
+		var video = document.getElementById("video-player");
+		video.src = "/video_feed";
+
+		// Handle the "Capture" button click event
+		var captureButton = document.getElementById("capture");
+		captureButton.onclick = function() {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "/capture");
+			xhr.send();
+		};
+	</script>
+</body>
+</html>
